@@ -1,0 +1,42 @@
+# dependencies
+node_modules
+.pnpm-debug.log*
+
+# build
+dist
+build
+
+# production
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# misc
+.DS_Store
+*.pem
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*.swn
+
+# Project specific
+monitoring/grafana/
+monitoring/prometheus/
+monitoring/alertmanager/
+# But keep the config files if needed, or ignore the data folders
+**/data/
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# System Files
+Thumbs.db
+desktop.ini

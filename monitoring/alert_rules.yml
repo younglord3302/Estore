@@ -1,0 +1,58 @@
+groups:
+- name: system_alerts
+  rules:
+  - alert: HighCPUUsage
+    expr: 100 - (avg by(instance) (irate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 80
+    for: 5m
+    labels:
+      severity: warning
+    annotations:
+      summary: "High CPU usage detected"
+      description: "CPU usage is {{ $value }}% on {{ $labels.instance }}"
+
+  - alert: HighMemoryUsage
+    expr: (1 - node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes) * 100 > 90
+    for: 5m
+    labels:
+      severity: warning
+    annotations:
+      summary: "High memory usage detected"
+      description: "Memory usage is {{ $value }}% on {{ $labels.instance }}"
+
+  - alert: DiskSpaceLow
+    expr: (node_filesystem_avail_bytes / node_filesystem_size_bytes) * 100 < 10
+    for: 5m
+    labels:
+      severity: critical
+    annotations:
+      summary: "Low disk space"
+      description: "Disk space is {{ $value }}% available on {{ $labels.instance }}"
+
+- name: app_alerts
+  rules:
+  - alert: AppDown
+    expr: up{job="ecommerce-backend"} == 0
+    for: 1m
+    labels:
+      severity: critical
+    annotations:
+      summary: "Application is down"
+      description: "The ecommerce backend application is not responding"
+
+  - alert: HighResponseTime
+    expr: histogram_quantile(0.95, rate(http_request_duration_seconds_bucket{job="ecommerce-backend"}[5m])) > 1
+    for: 5m
+    labels:
+      severity: warning
+    annotations:
+      summary: "High response time"
+      description: "95th percentile response time is {{ $value }}s"
+
+  - alert: HighErrorRate
+    expr: rate(http_requests_total{status=~"5..", job="ecommerce-backend"}[5m]) / rate(http_requests_total{job="ecommerce-backend"}[5m]) > 0.05
+    for: 5m
+    labels:
+      severity: critical
+    annotations:
+      summary: "High error rate"
+      description: "Error rate is {{ $value }}% for the application"

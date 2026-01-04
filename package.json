@@ -1,0 +1,11 @@
+{
+  "name": "ecommerce-monorepo",
+  "version": "1.0.0",
+  "description": "Full-stack e-commerce app monorepo",
+  "private": true,
+  "scripts": {
+    "dev": "pnpm --recursive run dev",
+    "build": "pnpm --recursive run build",
+    "start": "pnpm --recursive run start"
+  }
+}
