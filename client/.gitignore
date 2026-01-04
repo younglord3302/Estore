@@ -97,7 +97,7 @@ dist
 # Gatsby files
 .cache/
 # Comment the next line if you want to checkin your resources from public/
-public
+# public
 
 # vue-cli build output
 dist
