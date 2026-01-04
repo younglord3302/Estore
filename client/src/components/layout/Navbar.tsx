@@ -16,11 +16,12 @@ const Navbar: React.FC = () => {
     <nav className="fixed top-0 left-0 right-0 z-50 px-4 py-4 pointer-events-none">
       <div className="max-w-7xl mx-auto flex justify-between items-center px-6 py-3 glass-card pointer-events-auto">
         <div className="flex items-center space-x-8">
-          <Link to="/" className="flex items-center space-x-2 group">
-            <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-white font-bold group-hover:rotate-12 transition-transform shadow-lg">
-              E
-            </div>
-            <span className="text-xl font-bold font-heading hidden md:block">Store</span>
+          <Link to="/" className="flex items-center group">
+            <img 
+              src="/doo_logo.png" 
+              alt="Doo Logo" 
+              className="h-10 w-auto object-contain group-hover:scale-110 transition-transform duration-500"
+            />
           </Link>
           
           <div className="hidden sm:flex items-center space-x-1 bg-black/20 p-1 rounded-full border border-white/5">
